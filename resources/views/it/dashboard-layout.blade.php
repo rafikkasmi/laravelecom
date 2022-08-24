@@ -19,19 +19,19 @@
             <ul class="navbar-nav ml-auto">
                 @if (Request::segment(2)=='products')
                 <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.create') }}">Ajouter Produit</a>
+                        <a class="nav-link" href="{{ route('it.products.create') }}">Ajouter Produit</a>
                     </li>
                 @endIf  
                 @if (Request::segment(2)=='events')
                 <li class="nav-item">
-                        <a class="nav-link" href="{{ route('events.create') }}">Ajouter Evenement</a>
+                        <a class="nav-link" href="{{ route('it.events.create') }}">Ajouter Evenement</a>
                     </li>
                 @endIf  
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.index') }}">Produits</a>
+                        <a class="nav-link" href="{{ route('it.products.index') }}">Produits</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('events.index') }}">Evenements</a>
+                        <a class="nav-link" href="{{ route('it.events.index') }}">Evenements</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>

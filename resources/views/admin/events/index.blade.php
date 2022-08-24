@@ -1,42 +1,46 @@
-@extends('it.dashboard-layout')
+@extends('admin.dashboard-layout')
   
 @section('content')
-<main class="products">
+<main class="events">
   <div class="container">
       <div class="row justify-content-center">
             <div class="col-md-8">
-            <h1>Produits</h1>
+            <h1>Evenements</h1>
             <table class="table">
                 <thead>
                     <tr>
                     <th scope="col">id</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Stock</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Categorie</th>
                     <th scope="col">Modifier</th>
                     <th scope="col">Supprimer</th>
+                    <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($products as $product)
+                @foreach ($events as $event)
                     <tr>
-                    <td>{{$product->id}}</td>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->stock}}</td>
+                    <td>{{$event->id}}</td>
+                    <td>{{$event->name}}</td>
                     <td class="w-25">
-			         <img src="{{$product->image}}" class="img-fluid img-thumbnail" alt="Sheep">
+			         <img src="{{$event->image}}" class="img-fluid img-thumbnail">
 		            </td>    
-                    <td>{{$product->category->name}}</td>
-                    <td><a href="{{ route('it.products.edit', $product->id)}}" class="btn btn-primary">Modifier</a></td>
+                    <td><a href="{{ route('admin.events.edit', $event->id)}}" class="btn btn-primary">Modifier</a></td>
                     <td>
-                    <form action="{{ route('it.products.destroy', $product->id)}}" method="post">
+                    <form action="{{ route('admin.events.destroy', $event->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Supprimer</button>
                         </form>
+                    </td>
+                    <td>
+                        @if ($event->status === 1)
+                            <p class="text-secondary">En Attente</p>
+                        @elseif ($event->status === 2   )
+                            <p class="text-success">Accepté</p>
+                        @else
+                            <p class="text-danger">Refusé</p>
+                        @endif
                     </td>
                     </tr>
                     @endforeach

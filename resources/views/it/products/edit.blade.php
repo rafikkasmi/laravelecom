@@ -8,7 +8,7 @@
             <h1>Nouveau Produit</h1>
             <div class="card">
                   <div class="card-body">  
-                        <form method="post" action="{{ route('products.update', $product->id ) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('it.products.update', $product->id ) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                           <div class="form-group row">

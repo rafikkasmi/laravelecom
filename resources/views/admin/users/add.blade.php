@@ -8,7 +8,7 @@
             <h1>Nouveau Produit</h1>
             <div class="card">
                   <div class="card-body">  
-                      <form action="{{ route('users.store') }}" method="POST">
+                      <form action="{{ route('admin.users.store') }}" method="POST">
                           @csrf
                           <div class="form-group row">
                               <label for="name" class="col-md-4 col-form-label text-md-right">Nom</label>

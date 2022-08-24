@@ -8,7 +8,7 @@
             <h1>Nouveau Produit</h1>
             <div class="card">
                   <div class="card-body">  
-                      <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                      <form action="{{ route('it.products.store') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           <div class="form-group row">
                               <label for="name" class="col-md-4 col-form-label text-md-right">Nom de produit</label>

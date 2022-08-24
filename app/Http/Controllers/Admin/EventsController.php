@@ -1,0 +1,137 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Event;
+use App\Models\Category;
+
+class EventsController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $events=Event::where('status','!=', Event::PENDING)->orderBy('created_at','desc')->get();
+        return view('admin.events.index',['events'=>$events]);
+    }
+    public function pending(Request $request)
+    {
+        //
+        $pendingEvents = Event::where('status', Event::PENDING)->orderBy('created_at','desc')->get();
+
+        return view('admin.events.pending',['events'=>$pendingEvents]);
+    }
+
+    public function create(Request $request)
+    {
+        //
+        return view('admin.events.add');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $request->validate([
+            'name'       => 'required',
+            'image' => 'required|mimes:jpg,jpeg,png,gif',
+        ]);
+        $data = $request->all();
+        $fileName = time().'_'.$request->image->getClientOriginalName();
+        $filePath = $request->file('image')->storeAs('uploads', $fileName, 'public');
+        $data['image'] = '/storage/' . $filePath;
+        $data['it_id']=$request->user()->id;
+        Event::create($data);
+         
+        return redirect("/admin/events")->withSuccess('Great! Event added');
+
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $event = Event::where([
+            'id'=>$id,
+        ])->first();
+        return view('admin.events.edit',['event'=>$event]);
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+       
+        $request->validate([
+            'name'       => 'required',
+        ]);
+
+        $data = $request->all();
+        if($request->hasFile('image')){
+            $fileName = time().'_'.$request->image->getClientOriginalName();
+            $filePath = $request->file('image')->storeAs('uploads', $fileName, 'public');
+            $data['image'] = '/storage/' . $filePath;
+        }
+        Event::where([
+            'id'=>$id,
+        ])->first()->update($data);
+
+         
+        return redirect("/admin/events")->withSuccess('Great! Event updated');
+    }
+
+      public function destroy($id)
+    {
+        //
+        $event = Event::where(['id'=>$id])->first();
+
+        if($event){
+            $event->delete();
+            return redirect("/admin/events")->withSuccess('Great! Event deleted');
+        }
+        return redirect("/admin/events")->withError('Error! Event not found');
+    }
+  
+
+     public function accept($id)
+    {
+        //
+        $event = Event::findOrFail($id);
+        $event->update([
+            'status'=> Event::ACCEPTED
+        ]);
+        return redirect("/admin/events")->withSuccess('Great! Event accepted');
+    }
+
+    public function deny($id)
+    {
+        //
+        $event = Event::findOrFail($id);
+        $event->update([
+            'status'=> Event::REFUSED
+        ]);
+        return redirect("/admin/events")->withSuccess('Great! Event rejected');
+    }
+}

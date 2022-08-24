@@ -1,4 +1,4 @@
-@extends('it.dashboard-layout')
+@extends('admin.dashboard-layout')
   
 @section('content')
 <main class="events">
@@ -8,7 +8,7 @@
             <h1>Nouveau Produit</h1>
             <div class="card">
                   <div class="card-body">  
-                        <form method="post" action="{{ route('it.events.update', $event->id ) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.events.update', $event->id ) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')       
                              <div class="form-group row">
@@ -40,6 +40,21 @@
                                     <label class="custom-file-label" for="chooseFile">Selectionner Image</label>
                                 </div>                                  @if ($errors->has('image'))
                                       <span class="text-danger">{{ $errors->first('image') }}</span>
+                                  @endif
+                              </div>
+                          </div>
+
+                          <div class="form-group row">
+                              <label for="status" class="col-md-4 col-form-label text-md-right">Status:</label>
+                              <div class="col-md-6">
+                                <select name="status" id="status" class="form-control">
+                                    @foreach(['En Attente','Accepté','Refusé'] as $id=>$status)
+                                        <option value='{{$id+1}}' {{ $id+1 == $event->status ? 'selected' : '' }}>{{$status}}</option>
+                                    @endforeach
+                                </select>
+
+                              @if ($errors->has('status'))
+                                      <span class="text-danger">{{ $errors->first('status') }}</span>
                                   @endif
                               </div>
                           </div>

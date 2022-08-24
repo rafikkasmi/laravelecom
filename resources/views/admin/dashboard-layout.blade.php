@@ -19,19 +19,23 @@
             <ul class="navbar-nav ml-auto">
                 @if (Request::segment(2)=='users')
                 <li class="nav-item">
-                        <a class="nav-link" href="{{ route('users.create') }}">Ajouter Utilisateur</a>
+                        <a class="nav-link" href="{{ route('admin.users.create') }}">Ajouter Utilisateur</a>
                     </li>
+                    
                 @endIf  
                 @if (Request::segment(2)=='events')
                 <li class="nav-item">
-                        <a class="nav-link" href="{{ route('events.create') }}">Ajouter Evenement</a>
+                        <a class="nav-link" href="{{ route('admin.events.create') }}">Ajouter Evenement</a>
                     </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.events.pending') }}">Evenemtns En Attente</a>
+                </li>
                 @endIf  
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('users.index') }}">Utilisateurs</a>
+                        <a class="nav-link" href="{{ route('admin.users.index') }}">Utilisateurs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('events.index') }}">Evenements</a>
+                        <a class="nav-link" href="{{ route('admin.events.index') }}">Evenements</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>

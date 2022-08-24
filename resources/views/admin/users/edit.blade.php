@@ -8,7 +8,7 @@
             <h1>Nouveau Produit</h1>
             <div class="card">
                   <div class="card-body">  
-                      <form action="{{ route('users.update',$user->id) }}" method="POST">
+                      <form action="{{ route('admin.users.update',$user->id) }}" method="POST">
                           @csrf
                         @method('PATCH')
                           <div class="form-group row">

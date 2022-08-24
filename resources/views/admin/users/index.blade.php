@@ -5,7 +5,7 @@
   <div class="container">
       <div class="row justify-content-center">
             <div class="col-md-8">
-            <h1>Users</h1>
+            <h1>Utilisateurs</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -45,9 +45,9 @@
                             <p class="text-danger">Inactif</p>
                         @endif
                     </td>
-                    <td><a href="{{ route('users.edit', $user->id)}}" class="btn btn-primary">Modifier</a></td>
+                    <td><a href="{{ route('admin.users.edit', $user->id)}}" class="btn btn-primary">Modifier</a></td>
                     <td>
-                    <form action="{{ route('users.block', $user->id)}}" method="post">
+                    <form action="{{ route('admin.users.block', $user->id)}}" method="post">
                         @csrf
                         @method('PATCH')
                         <button class="btn btn-danger" type="submit">
@@ -60,7 +60,7 @@
                         </form>
                     </td>
                     <td>
-                    <form action="{{ route('users.destroy', $user->id)}}" method="post">
+                    <form action="{{ route('admin.users.destroy', $user->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Supprimer</button>
