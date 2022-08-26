@@ -37,9 +37,9 @@
                         @if ($event->status === 1)
                             <p class="text-secondary">En Attente</p>
                         @elseif ($event->status === 2   )
-                            <p class="text-success">Accepté</p>
+                            <p class="text-success">Refusé</p>
                         @else
-                            <p class="text-danger">Refusé</p>
+                            <p class="text-danger">Accepté</p>
                         @endif
                     </td>
                     </tr>

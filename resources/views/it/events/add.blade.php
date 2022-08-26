@@ -5,13 +5,13 @@
   <div class="container">
       <div class="row justify-content-center">
             <div class="col-md-8">
-            <h1>Nouveau Produit</h1>
+            <h1>Nouveau Evenement</h1>
             <div class="card">
                   <div class="card-body">  
                       <form action="{{ route('it.events.store') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           <div class="form-group row">
-                              <label for="name" class="col-md-4 col-form-label text-md-right">Nom de produit</label>
+                              <label for="name" class="col-md-4 col-form-label text-md-right">Nom de l'evenement</label>
                               <div class="col-md-6">
                                   <input type="text" id="name" class="form-control" name="name" required autofocus>
                                   @if ($errors->has('name'))

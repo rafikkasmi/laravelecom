@@ -29,7 +29,7 @@ class AuthController extends Controller
         Auth::login($user);
 
   
-        return redirect("welcome")->withSuccess('yaaayyy connected');
+        return redirect("/")->withSuccess('yaaayyy connected');
     }
 
     public function register(Request $request){

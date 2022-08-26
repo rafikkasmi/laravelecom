@@ -22,9 +22,14 @@ class Event extends Model
         'status',
      ];
 
-     public function products()
+     public function likes()
     {
-        return $this->hasMany(Product::class,'category_id');
+        return $this->hasMany(Like::class,'event_id');
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'event_id');
     }
     
     public function it()

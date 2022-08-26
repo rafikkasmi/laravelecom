@@ -6,6 +6,12 @@ use App\Http\Controllers\It\ProductsController;
 use App\Http\Controllers\It\EventsController as ITEventsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\EventsController as AdminEventsController;
+use App\Http\Controllers\Shop\PagesController;
+use App\Http\Controllers\Shop\CartController;
+use App\Http\Controllers\Shop\CheckoutController;
+use App\Http\Controllers\Shop\ReviewController;
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Events\EventsController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -65,8 +71,33 @@ Route::get("/login", function(){
             // Route::resource('evenements', PhotoController::class);
         });  
     // }
+    
+    Route::get("/cart", [PagesController::class,'cart'])->name('cart');
+    Route::post("/cart/{id}", [CartController::class,'addToCart'])->name('addToCart');
+    Route::post("/cart/remove/{id}", [CartController::class,'removeFromCart'])->name('removeFromCart');
+    Route::get("/cart-count", [CartController::class,'cartCount'])->name('cartCount');
+    Route::post("/product/{id}/review", [ReviewController::class,'postReview'])->name('postReview');
+
+    //checkout
+    Route::get("/checkout", [PagesController::class,'checkout'])->name('checkout');
+    Route::post("/checkout", [CheckoutController::class,'confirmOrder'])->name('confirmOrder');
+
+    //events
+    Route::get("/event/like/{id}", [EventsController::class,'like'])->name('like');
+    Route::post("/event/comment/{id}", [EventsController::class,'comment'])->name('comment');
+
+    //account
+    Route::get("/account", [AccountController::class,'index'])->name('checkout');
+    Route::post("/account/update-user-data", [AccountController::class,'updateUserData'])->name('updateUserData');
+    Route::post("/account/reset-password", [AccountController::class,'resetPassword'])->name('resetPassword');
+
+    Route::get("/account/orders", [AccountController::class,'orders'])->name('orders');
+    
+
 });
 
-    Route::get("/welcome", function(){
-        return view("welcome");
-     })->name('welcome');
+    Route::get("/", [PagesController::class,'index'])->name('index');
+    Route::get("/shop", [PagesController::class,'shop'])->name('shop');
+    Route::get("/product/{id}", [PagesController::class,'product'])->name('product');
+
+    Route::get("/events", [EventsController::class,'index'])->name('index');
