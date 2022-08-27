@@ -21,7 +21,10 @@
               <ul class="list-inline mb-2 text-sm">
               </ul>
               <h1>{{$product->name}}"</h1>
-              <p class="text-muted lead">{{$product->price}} Da</p>
+              @if($product->discount_price)
+              <p class="text-muted lead" style="text-decoration:line-through;">{{$product->price}} Da</p>
+              @endif
+              <p class="text-muted lead">{{$product->discount_price ? $product->discount_price : $product->price}} Da</p>
               <div class="mb-4"></div>
               <div class="row align-items-stretch mb-4">
                 <div class="col-sm-5 pr-sm-0">
@@ -38,9 +41,11 @@
                     <button class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0 addtocart" type="submit" @guest href="{{route('login')}}" @endauth>Ajouter panier</button>
                 </div>
               </div><a class="text-dark p-0 mb-4 d-inline-block" href="#!"></a><br>
+              @if($product->category)
               <ul class="list-unstyled small d-inline-block">
                 <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Categorie:</strong><a class="reset-anchor ms-2" href="{{ route('shop', ['category' => $product->category->id]) }}">{{$product->category->name}}</a></li>
               </ul>
+              @endif
             </div>
           </div>
           <!-- DETAILS TABS-->
@@ -139,8 +144,6 @@
             let xhr = new XMLHttpRequest();
             xhr.open('POST', "{{ route('addToCart', $product->id)}}", true);
             xhr.onload = function () {
-                // do something to response
-                // alert(this.responseText);
                  addQuantity(quantity)
             };
             xhr.send(data);

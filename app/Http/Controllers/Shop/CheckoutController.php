@@ -41,8 +41,9 @@ class CheckoutController extends Controller
                 'product_id' => $productId,
                 'order_id' => $order->id,
                 'quantity' => $item['quantity'],
+                'price' => $item['price'],
             ]);
-            $order->total += $item['quantity'] * $product->price;
+            $order->total += $item['quantity'] * $item['price'];
         }
         $order->save();
         session()->forget('cart');

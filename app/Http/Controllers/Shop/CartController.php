@@ -22,7 +22,7 @@ class CartController extends Controller
             $cart[$id] = [
                 "name" => $product->name,
                 "quantity" => $request->quantity,
-                "price" => $product->price,
+                "price" => $product->discount_price ? $product->discount_price :$product->price,
                 "image" => $product->image
             ];
         }
@@ -50,6 +50,14 @@ class CartController extends Controller
             $count += $item['quantity'];
         }
         return $count;
+    }
+
+    public function updateCart(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $cart[$request->id]['quantity'] = $request->quantity;
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product quantity updated successfully!');
     }
 
  }

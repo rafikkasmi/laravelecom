@@ -7,7 +7,7 @@
           <div class="container">
             <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
               <div class="col-lg-6">
-                <h1 class="h2 text-uppercase mb-0">{{$category ? $category->name : 'Boutique'}}</h1>
+                <h1 class="h2 text-uppercase mb-0">Bestsellers de {{$category->name}}</h1>
               </div>
               <div class="col-lg-6 text-lg-end">
                 <nav aria-label="breadcrumb">
@@ -26,10 +26,9 @@
               <!-- SHOP SIDEBAR-->
               <div class="col-lg-3 order-2 order-lg-1">
                 <h5 class="text-uppercase mb-4">Categories</h5>
-                <div class="py-2 px-4 bg-light mb-3"><a class="reset-anchor active" href="{{ route('shop')}}"><strong class="small text-uppercase fw-bold">Tous</strong></a></div>
                 <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
                 @foreach($categories as $category)
-                  <li class="mb-2"><a class="reset-anchor" href="{{ route('shop', ['category' => $category->id]) }}">{{$category->name}}</a></li>
+                  <li class="mb-2"><a class="reset-anchor" href="{{ route('bestSeller',$category->id) }}">{{$category->name}}</a></li>
                 @endforeach
                 </ul>
               </div>

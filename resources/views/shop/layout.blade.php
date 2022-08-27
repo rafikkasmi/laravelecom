@@ -56,6 +56,7 @@ function activeClass($current_page){
                 <li class="nav-item"><a class="nav-link {{activeClass('cart')}}" href="/cart"> <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Panier<small class="text-gray fw-normal cartcount">(0)</small></a></li>
                 @auth
                 <li class="nav-item"><a class="nav-link {{activeClass('account')}}" href="/account"> <i class="fas fa-user me-1 text-gray fw-normal"></i>Compte</a></li>
+                <li class="nav-item"><a class="nav-link {{activeClass('logout')}}" href="/logout"> <i class="fas fa-door-open me-1 text-gray"></i>Se Deconnecter</a></li>
                 @else
                 <li class="nav-item"><a class="nav-link {{activeClass('login')}}" href="login"> <i class="fas fa-user me-1 text-gray fw-normal"></i>Se Connecter</a></li>
                 @endauth

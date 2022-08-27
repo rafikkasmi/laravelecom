@@ -1,4 +1,4 @@
-@extends('it.dashboard-layout')
+@extends('admin.dashboard-layout')
   
 @section('content')
 <main class="products">
@@ -12,9 +12,7 @@
                     <th scope="col">id</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prix</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Categorie</th>
+                    <th scope="col">Prix reduction</th>
                     <th scope="col">Modifier</th>
                     <th scope="col">Supprimer</th>
                     </tr>
@@ -25,19 +23,17 @@
                     <td>{{$product->id}}</td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->price}}</td>
-                    <td>{{$product->stock}}</td>
-                    <td class="w-25">
-			         <img src="{{$product->image}}" class="img-fluid img-thumbnail" alt="Sheep">
-		            </td>    
-                    <td>{{$product->category ? $product->category->name :'makach'}}</td>
-                    <td><a href="{{ route('it.products.edit', $product->id)}}" class="btn btn-primary">Modifier</a></td>
+                    <td>{{$product->discount_price ? $product->discount_price : 'None'}}</td>
+                    <td><a href="{{ route('admin.discounts.edit', $product->id)}}" class="btn btn-primary">{{$product->discount_price ? 'Modifier Reduction' : 'Ajouter Reduction' }}</a></td>
+                    @if($product->discount_price!=null)
                     <td>
-                    <form action="{{ route('it.products.destroy', $product->id)}}" method="post">
+                    <form action="{{ route('admin.discounts.destroy', $product->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Supprimer</button>
+                        <button class="btn btn-danger" type="submit">Supprimer Reduction</button>
                         </form>
                     </td>
+                    @endif
                     </tr>
                     @endforeach
                 </tbody>

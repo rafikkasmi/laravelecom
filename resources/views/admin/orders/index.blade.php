@@ -1,16 +1,12 @@
-@extends('account.layout')
-@section('accountpage')
-<div class="container">
-     @if(session()->has('success'))
-        <div class="alert alert-success">
-            {{ session()->get('success') }}
-        </div>
-    @endif
-      <h2 class="h5 text-uppercase mb-4 text-center">Commandes</h2>
+@extends('admin.dashboard-layout')
+  
+@section('content')
+<main class="container orders">
+ <h2 class="h5 text-uppercase my-4 text-center">Commandes</h2>
           <div class="row d-flex justify-content-center mb-5">
     
           @foreach($orders as $order)
-            <div class="col-lg-8">
+            <div class="col-lg-8 mb-3">
               <div class="card">
                 <div class="card-header">
                   <h4 class="h5">Commande n°{{$order->id}}</h4>
@@ -28,12 +24,12 @@
                     </thead>
                     <tbody>
                       @foreach($order->orderItems as $orderItem)
-                      @php $total += $orderItem->product->price * $orderItem->quantity; @endphp
+                      @php $total += $orderItem->price * $orderItem->quantity; @endphp
                       <tr>
                         <td><a href="{{route('product',$orderItem->product->id)}}" class="reset-anchor">{{$orderItem->product->name}}</a></td>
                         <td>{{$orderItem->product->price}} Da</td>
                         <td>{{$orderItem->quantity}}</td>
-                        <td>{{$orderItem->quantity * $orderItem->product->price}} Da</td>
+                        <td>{{$orderItem->quantity * $orderItem->price}} Da</td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -49,4 +45,8 @@
             </div>
           @endforeach
           </div>
+          <div class="d-flex justify-content-center">
+             {{ $orders->links() }}
+             </div>
+          </main>
 @endsection

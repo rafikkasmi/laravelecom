@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\It\ProductsController;
 use App\Http\Controllers\It\EventsController as ITEventsController;
+use App\Http\Controllers\It\CategoriesController as ItCategoriesController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\EventsController as AdminEventsController;
+use App\Http\Controllers\Admin\DiscountsController;
 use App\Http\Controllers\Shop\PagesController;
 use App\Http\Controllers\Shop\CartController;
 use App\Http\Controllers\Shop\CheckoutController;
@@ -40,41 +42,34 @@ Route::get("/login", function(){
  Route::post('/login', [AuthController::class, 'login'])->name('login.post');
  Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 
- Route::group(['middleware' => 'auth'], function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    //les routes de it dashboard
-    // if(User::findOrFail(Auth::user()->id)->role_id == User::IT_ROLE){
-        Route::prefix('it')->name('it.')->group(function () {
-            Route::resource('products', ProductsController::class);
-            Route::resource('events', ITEventsController::class);
-        });  
-       
-        Route::prefix('admin')->name('admin.')->group(function () {
+ Route::group(['middleware' => 'auth'], function () {        
+        Route::group(['prefix'=>'admin','middleware'=>'admin','as'=>'admin.'],function () {
             Route::resource('users', UsersController::class);
             Route::patch('/users/block/{id}', [UsersController::class,'block'])->name('users.block');
             
             Route::patch('/events/accept/{id}', [AdminEventsController::class,'accept'])->name('events.accept');
             Route::patch('/events/deny/{id}', [AdminEventsController::class,'deny'])->name('events.deny');
             Route::get('events/pending', [AdminEventsController::class,'pending'])->name('events.pending');
-            Route::resource('events', AdminEventsController::class);
+            Route::resource('events', AdminEventsController::class);       
 
-            // Route::name('products.')->prefix('products')->group(function() {
-            //     Route::get('/', [ProductsController::class,'index'])->name('index');
-            //     Route::get('/add', [ProductsController::class,'addPage'])->name('addPage');
-            //     Route::post('/add', [ProductsController::class,'create'])->name('create');
-            //     Route::get('/edit/{id}', [ProductsController::class,'edit'])->name('edit');
-            //     Route::patch('/edit/{id}', [ProductsController::class,'update'])->name('update');
-            //     Route::delete('/delete/{id}', [ProductsController::class,'delete'])->name('delete');
-                
-            // });
-            
-            // Route::resource('evenements', PhotoController::class);
+            Route::get('discounts', [DiscountsController::class,'index'])->name('discounts.index');
+            Route::get('discounts/edit/{id}', [DiscountsController::class,'edit'])->name('discounts.edit');
+            Route::delete('discounts/destroy/{id}', [DiscountsController::class,'destroy'])->name('discounts.destroy');
+            Route::patch('discounts/update/{id}', [DiscountsController::class,'update'])->name('discounts.update');
+
+            Route::get('orders', [DiscountsController::class,'orders'])->name('orders.index');
         });  
-    // }
-    
+ 
+        Route::group(['prefix'=>'it','middleware'=>'it','as'=>'it.'],function () {
+            Route::resource('products', ProductsController::class);
+            Route::resource('events', ITEventsController::class);
+            Route::resource('categories', ItCategoriesController::class);
+        });  
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get("/cart", [PagesController::class,'cart'])->name('cart');
     Route::post("/cart/{id}", [CartController::class,'addToCart'])->name('addToCart');
     Route::post("/cart/remove/{id}", [CartController::class,'removeFromCart'])->name('removeFromCart');
+    Route::post("/cart/update/{id}", [CartController::class,'updateCart'])->name('updateCart');
     Route::get("/cart-count", [CartController::class,'cartCount'])->name('cartCount');
     Route::post("/product/{id}/review", [ReviewController::class,'postReview'])->name('postReview');
 
@@ -92,12 +87,11 @@ Route::get("/login", function(){
     Route::post("/account/reset-password", [AccountController::class,'resetPassword'])->name('resetPassword');
 
     Route::get("/account/orders", [AccountController::class,'orders'])->name('orders');
-    
-
 });
 
     Route::get("/", [PagesController::class,'index'])->name('index');
     Route::get("/shop", [PagesController::class,'shop'])->name('shop');
     Route::get("/product/{id}", [PagesController::class,'product'])->name('product');
+    Route::get("/bestseller/{id}", [PagesController::class,'bestSeller'])->name('bestSeller');
 
     Route::get("/events", [EventsController::class,'index'])->name('index');

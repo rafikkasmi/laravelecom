@@ -8,6 +8,11 @@
             {{ session()->get('success') }}
         </div>
     @endif
+     @if(session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
         <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url(img/hero-banner-alt.jpg)">
           <div class="container py-5">
             <div class="row px-4 px-lg-5">
@@ -19,27 +24,28 @@
           </div>
         </section>
         <!-- CATEGORIES SECTION-->
-        <section class="pt-5">
+        <section class="py-5">
           <header class="text-center">
-            <h2 class="h5 text-uppercase mb-4">Nos categories</h2>
+            <h2 class="h5 text-uppercase mb-4">Nos bestsellers categories</h2>
           </header>
-          <div class="row">
-            <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid" src="img/cat-img-1.jpg" alt=""/><strong class="category-item-title">Clothes</strong></a>
+          <div class="row d-flex justify-content-center">
+            @foreach($categories as $category)
+            <div class="col-md-4" style="width: 18rem;"><a class="category-item" href="/bestseller/{{$category->id}}"><img class="img-fluid w-100 h-100" src="{{$category->image}}" alt=""/><strong class="category-item-title">{{$category->name}}</strong></a>
             </div>
-            <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid" src="img/cat-img-4.jpg" alt=""/><strong class="category-item-title">Shoes</strong></a>
+            @endforeach
+            <!-- <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid" src="img/cat-img-4.jpg" alt=""/><strong class="category-item-title">Shoes</strong></a>
             </div>
             <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid" src="img/cat-img-4.jpg" alt=""/><strong class="category-item-title">Electronics</strong></a>
-            </div>
+            </div> -->
           </div>
         </section>
         <!-- TRENDING PRODUCTS-->
-        <section class="py-5">
+        <!-- <section class="py-5">
           <header>
             <p class="small text-muted small text-uppercase mb-1">Made the hard way</p>
             <h2 class="h5 text-uppercase mb-4">Top trending products</h2>
           </header>
           <div class="row">
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -56,7 +62,6 @@
                 <p class="small text-muted">$250</p>
               </div>
             </div>
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -73,7 +78,6 @@
                 <p class="small text-muted">$300</p>
               </div>
             </div>
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -90,7 +94,6 @@
                 <p class="small text-muted">$25</p>
               </div>
             </div>
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -107,7 +110,6 @@
                 <p class="small text-muted">$351</p>
               </div>
             </div>
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -124,7 +126,6 @@
                 <p class="small text-muted">$250</p>
               </div>
             </div>
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -141,7 +142,6 @@
                 <p class="small text-muted">$300</p>
               </div>
             </div>
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -158,7 +158,6 @@
                 <p class="small text-muted">$25</p>
               </div>
             </div>
-            <!-- PRODUCT-->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
@@ -176,68 +175,35 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
         <!-- SERVICES-->
         <section class="py-5 bg-light">
           <div class="container">
             <div class="row text-center gy-3">
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="d-inline-block">
                   <div class="d-flex align-items-end">
                     <svg class="svg-icon svg-icon-big svg-icon-light">
                       <use xlink:href="#delivery-time-1"> </use>
                     </svg>
                     <div class="text-start ms-3">
-                      <h6 class="text-uppercase mb-1">Free shipping</h6>
-                      <p class="text-sm mb-0 text-muted">Free shipping worldwide</p>
+                      <h6 class="text-uppercase mb-1">Meilleure Qualité</h6>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="d-inline-block">
                   <div class="d-flex align-items-end">
                     <svg class="svg-icon svg-icon-big svg-icon-light">
                       <use xlink:href="#helpline-24h-1"> </use>
                     </svg>
                     <div class="text-start ms-3">
-                      <h6 class="text-uppercase mb-1">24 x 7 service</h6>
-                      <p class="text-sm mb-0 text-muted">Free shipping worldwide</p>
+                      <h6 class="text-uppercase mb-1">Meilleurs Prix</h6>
+                      <!-- <p class="text-sm mb-0 text-muted">Free shipping worldwide</p> -->
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="d-inline-block">
-                  <div class="d-flex align-items-end">
-                    <svg class="svg-icon svg-icon-big svg-icon-light">
-                      <use xlink:href="#label-tag-1"> </use>
-                    </svg>
-                    <div class="text-start ms-3">
-                      <h6 class="text-uppercase mb-1">Festivaloffers</h6>
-                      <p class="text-sm mb-0 text-muted">Free shipping worldwide</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- NEWSLETTER-->
-        <section class="py-5">
-          <div class="container p-0">
-            <div class="row gy-3">
-              <div class="col-lg-6">
-                <h5 class="text-uppercase">Let's be friends!</h5>
-                <p class="text-sm text-muted mb-0">Nisi nisi tempor consequat laboris nisi.</p>
-              </div>
-              <div class="col-lg-6">
-                <form action="#">
-                  <div class="input-group">
-                    <input class="form-control form-control-lg" type="email" placeholder="Enter your email address" aria-describedby="button-addon2">
-                    <button class="btn btn-dark" id="button-addon2" type="submit">Subscribe</button>
-                  </div>
-                </form>
               </div>
             </div>
           </div>

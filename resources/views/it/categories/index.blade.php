@@ -1,11 +1,11 @@
-@extends('admin.dashboard-layout')
+@extends('it.dashboard-layout')
   
 @section('content')
-<main class="events">
+<main class="products">
   <div class="container">
       <div class="row justify-content-center">
             <div class="col-md-8">
-            <h1>Evenements</h1>
+            <h1>Categories</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -14,33 +14,23 @@
                     <th scope="col">Image</th>
                     <th scope="col">Modifier</th>
                     <th scope="col">Supprimer</th>
-                    <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($events as $event)
+                @foreach ($categories as $category)
                     <tr>
-                    <td>{{$event->id}}</td>
-                    <td>{{$event->name}}</td>
+                    <td>{{$category->id}}</td>
+                    <td>{{$category->name}}</td>
                     <td class="w-25">
-			         <img src="{{$event->image}}" class="img-fluid img-thumbnail">
+			         <img src="{{$category->image}}" class="img-fluid img-thumbnail">
 		            </td>    
-                    <td><a href="{{ route('admin.events.edit', $event->id)}}" class="btn btn-primary">Modifier</a></td>
+                    <td><a href="{{ route('it.categories.edit', $category->id)}}" class="btn btn-primary">Modifier</a></td>
                     <td>
-                    <form action="{{ route('admin.events.destroy', $event->id)}}" method="post">
+                    <form action="{{ route('it.categories.destroy', $category->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Supprimer</button>
                         </form>
-                    </td>
-                    <td>
-                        @if ($event->status === 1)
-                            <p class="text-secondary">En Attente</p>
-                        @elseif ($event->status === 2   )
-                            <p class="text-danger">Refusé</p>
-                        @else
-                            <p class="text-success">Accepté</p>
-                        @endif
                     </td>
                     </tr>
                     @endforeach

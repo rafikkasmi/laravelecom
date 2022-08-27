@@ -17,6 +17,7 @@ class Product extends Model
         'it_id',
         'category_id',
         'stock',
+        'discount_price'
     ];
     
     public function category()
@@ -31,5 +32,9 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class,'product_id');
+    }
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class,'product_id');
     }
 }

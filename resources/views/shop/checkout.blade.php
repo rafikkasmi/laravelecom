@@ -2,6 +2,12 @@
   
 @section('content')
 <div class="container">
+              @if(!session('cart'))
+                <script>
+                window.location = "/shop";
+              </script>
+              @endif
+
         <!-- HERO SECTION-->
         <section class="py-5 bg-light">
           <div class="container">
@@ -78,6 +84,7 @@
               <div class="card border-0 rounded-0 p-lg-4 bg-light">
                 <div class="card-body">
                   <h5 class="text-uppercase mb-4">Your order</h5>
+                   @if(session('cart'))
                   <ul class="list-unstyled mb-0">
                     @php $total = 0 @endphp
                      @foreach(session('cart') as $id => $details)
@@ -87,10 +94,13 @@
                     @endforeach
                     <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span>{{$total}} Da</span></li>
                   </ul>
+                  @endif
                 </div>
               </div>
             </div>
           </div>
         </section>
       </div>
+      <script defer>
+        </script>
 @endsection

@@ -36,7 +36,6 @@
                               <div class="col-md-6">
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input" id="image ">
-                                    <label class="custom-file-label" for="chooseFile">Selectionner Image</label>
                                 </div>                                  @if ($errors->has('image'))
                                       <span class="text-danger">{{ $errors->first('image') }}</span>
                                   @endif
