@@ -60,14 +60,6 @@ function activeClass($current_page){
                         <a class="nav-link" href="{{ route('admin.users.create') }}">Ajouter Utilisateur</a>
                     </li>       
                 @endIf  
-                @if (Request::segment(2)=='events')
-                <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.events.create') }}">Ajouter Evenement</a>
-                    </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.events.pending') }}">Evenemtns En Attente</a>
-                </li>
-                @endIf             
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>

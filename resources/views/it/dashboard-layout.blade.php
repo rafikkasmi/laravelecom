@@ -50,9 +50,7 @@ function activeClass($current_page){
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('it.events.index') }}">Evenements</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                    </li>
+
             </ul>
              <ul class="navbar-nav ms-auto">               
                  @if (Request::segment(2)=='categories')

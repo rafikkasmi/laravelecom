@@ -14,12 +14,8 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+  
     public function index(Request $request)
-    {
-        $events=Event::where('status','!=', Event::PENDING)->orderBy('created_at','desc')->get();
-        return view('admin.events.index',['events'=>$events]);
-    }
-    public function pending(Request $request)
     {
         //
         $pendingEvents = Event::where('status', Event::PENDING)->orderBy('created_at','desc')->get();
