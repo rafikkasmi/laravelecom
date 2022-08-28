@@ -51,7 +51,7 @@
                       </td>
                       <td class="p-3 align-middle border-light">
                         <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantité</span>
-                          <div class="quantity">
+                          <div class="quantity" productId={{$id}}>
                             <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
                             <input class="quantity-input form-control form-control-sm border-0 shadow-0 p-0" type="text" readonly value="{{$details['quantity']}}"/>
                             <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
@@ -111,17 +111,14 @@
                 xhr.open('POST', `/cart/remove/${id}`, true);
                 xhr.onload = function () {
                     // do something to response
-                    alert(this.responseText);
+                     window.location.reload();
                 };
                 xhr.send(data);
-                alert(id)
             });
         });
-        document.querySelectorAll('.quantity-input').forEach((el) => {
-            el.addEventListener('change', () => {
-              alert("zebi")
-                let id = el.parentElement.parentElement.parentElement.querySelector('.product-id').value;
-                let quantity = el.value;
+        function updateCart(el){   
+                let id = el.closest('.quantity').getAttribute('productId')
+                let quantity = el.parentElement.querySelector('.quantity-input').value;
                 let data = new FormData();
                 data.append('_token', '{{ csrf_token() }}');
                 data.append('quantity', quantity);
@@ -129,11 +126,10 @@
                 xhr.open('POST', `/cart/update/${id}`, true);
                 xhr.onload = function () {
                     // do something to response
-                    alert(this.responseText);
+                     window.location.reload();
                 };
                 xhr.send(data);
-            });
-        });
+           }
 	
       </script>
 @endsection
