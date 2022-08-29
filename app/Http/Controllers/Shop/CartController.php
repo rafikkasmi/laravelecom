@@ -9,7 +9,7 @@ use App\Models\Category;
 
 class CartController extends Controller
 {
-    //
+    //une fonction li t'ajouter un produit au panier, t'ajoutih f une liste rahi mkhebya f la session li wsmha cart,
     public function addToCart(Request $request, $id)
     {
         $product = Product::findOrFail($id);
@@ -31,6 +31,7 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
+    //une fonction li t'ne7i un produit ml panier, t7ws 3lih b l'id ta3o w tne7ih
     public function removeFromCart(Request $request, $id)
     {
         $cart = session()->get('cart', []);
@@ -42,6 +43,8 @@ class CartController extends Controller
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product removed from cart successfully!');
     }
+
+    //une fonction li t'retourni chhal kayen mn element f le panier, 
     public function cartCount()
     {
         $cart = session()->get('cart', []);
@@ -52,6 +55,7 @@ class CartController extends Controller
         return $count;
     }
 
+    //une fonction li t'modifier la quantite d'un produit f le panier
     public function updateCart(Request $request)
     {
         $cart = session()->get('cart', []);

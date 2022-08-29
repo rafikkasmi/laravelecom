@@ -15,6 +15,7 @@ class EventsController extends Controller
      * @return \Illuminate\Http\Response
      */
   
+    //fonction  t'reje3 ga3 les events li mazalhom en attente f view t3ha
     public function index(Request $request)
     {
         //
@@ -23,17 +24,14 @@ class EventsController extends Controller
         return view('admin.events.pending',['events'=>$pendingEvents]);
     }
 
+    //  DISCLAIMER : FONCTION create,store,edit,update,destroy , ignore them , ma7ebitch n'supprimihom just in case
     public function create(Request $request)
     {
         //
         return view('admin.events.add');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
@@ -110,7 +108,7 @@ class EventsController extends Controller
         return redirect("/admin/events")->withError('Error! Event not found');
     }
   
-
+    //fonction li t'accepter un evenement
      public function accept($id)
     {
         //
@@ -121,6 +119,7 @@ class EventsController extends Controller
         return redirect("/admin/events")->withSuccess('Great! Event accepted');
     }
 
+    //fonction li t'refuser un evenement
     public function deny($id)
     {
         //

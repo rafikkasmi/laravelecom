@@ -9,11 +9,8 @@ use App\Models\Category;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    //fonction li treje3 page produits f IT dashboard
     public function index(Request $request)
     {
         //
@@ -24,6 +21,7 @@ class ProductsController extends Controller
         return view('it.products.index',['products'=>$products]);
     }
 
+    //fonction li treje3 page de creation d'un produit f IT dashboard
     public function create(Request $request)
     {
         //
@@ -31,11 +29,7 @@ class ProductsController extends Controller
         return view('it.products.add',['categories'=>$categories]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li t'creer un produit , it handles form ta3 la page li trj3ha la fonction precedente
     public function store(Request $request)
     {
         //
@@ -58,12 +52,7 @@ class ProductsController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li treje3 page de modification d'un produit
     public function edit($id)
     {
         //
@@ -76,13 +65,7 @@ class ProductsController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+       //fonction li t'modifier un produit 
     public function update(Request $request, $id)
     {
         //
@@ -108,6 +91,7 @@ class ProductsController extends Controller
         return redirect("/it/products")->withSuccess('Great! Product updated');
     }
 
+    //fonction li t'supprimi un produit
       public function destroy($id)
     {
         //

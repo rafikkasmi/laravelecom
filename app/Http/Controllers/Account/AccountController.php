@@ -10,12 +10,13 @@ use App\Models\Order;
 class AccountController extends Controller
 {
  
-
+    //fonction t'retourner view ta3 la page profile d'utilisateur,
    public function index()
     {
         return view('account.index');
     }
     
+    //fonction li t'handli le formulaire qui modifie user data
     public function updateUserData(Request $request)
     {
         $request->validate([
@@ -35,6 +36,7 @@ class AccountController extends Controller
         return redirect()->back()->with('success', 'Profile has been updated successfully!');
     }
 
+    //fonction t'modifier le mot de passe , lazem ykun fiha le mdp courant correct,
     public function resetPassword(Request $request)
     {
         $request->validate([
@@ -52,6 +54,7 @@ class AccountController extends Controller
         return redirect()->back()->with('success', 'Password has been updated successfully!');
     }
 
+    //fonction t'retourni view ta3 la page commandes , w rani nb3et fiha ga3 orders ta3 l'user comme data,
     public function orders()
     {
         $orders =Order::where('user_id',auth()->user()->id)->paginate(10);

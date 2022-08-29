@@ -13,6 +13,8 @@ use App\Models\OrderItem;
 class CheckoutController extends Controller
 {
     //
+    //une fonction li t'confirmer la commande, la requete tetb3et m la page checkout , t'modifier data ta3 user, w t'creer ligne f 
+    // table orders w t7et les elements de panier f order_items
     public function confirmOrder(Request $request)
     {
          $request->validate([

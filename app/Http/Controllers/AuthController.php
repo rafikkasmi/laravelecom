@@ -11,6 +11,7 @@ use App\Models\User;
 class AuthController extends Controller
 {
     //
+    //la fonction resposable d'authentifier la personne avec l'email et le mot de passe, et sauvgarde ses donnees f la session
     public function login(Request $request){
 
         $request->validate([
@@ -21,7 +22,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if(!Auth::validate($credentials)):
             return redirect()->to('login')
-                ->withErrors('fuck off');
+                ->withErrors('Credentials are wrong');
         endif;
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
@@ -32,6 +33,7 @@ class AuthController extends Controller
         return redirect("/")->withSuccess('yaaayyy connected');
     }
 
+    //la fonction resposable de creer une ligne f la table users d'utilisateur
     public function register(Request $request){
 
         $request->validate([
@@ -51,6 +53,7 @@ class AuthController extends Controller
             return redirect("login")->withSuccess('Great! You have Successfully loggedin');
     }
 
+    //la fonction li t'deconnecter users , t'supprimi session ta3o
     public function logout()
     {
         Session::flush();

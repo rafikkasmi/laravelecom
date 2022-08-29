@@ -9,11 +9,8 @@ use App\Models\Category;
 
 class EventsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    //fonction li treje3 page events f IT dashboard
     public function index(Request $request)
     {
         //
@@ -24,17 +21,14 @@ class EventsController extends Controller
         return view('it.events.index',['events'=>$events]);
     }
 
+    //fonction li treje3 page creation d'evenement f IT dashboard
     public function create(Request $request)
     {
         //
         return view('it.events.add');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li t'creer un evenement , par defaut ykoun en attente
     public function store(Request $request)
     {
         //
@@ -54,12 +48,7 @@ class EventsController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li treje3 page de modification d'un event f IT dashboard
     public function edit($id)
     {
         //
@@ -71,13 +60,7 @@ class EventsController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+     //fonction li t'modifier un evenement
     public function update(Request $request, $id)
     {
         //
@@ -103,6 +86,7 @@ class EventsController extends Controller
         return redirect("/it/events")->withSuccess('Great! Event updated');
     }
 
+    //fonction li t'supprimi un event
       public function destroy($id)
     {
         //

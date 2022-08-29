@@ -10,7 +10,7 @@ use App\Models\Review;
 class ReviewController extends Controller
 {
  
-
+    //fonction li t'handli le formulaire de noter un produit
    public function postReview(Request $request,$id)
     {
         $request->validate([

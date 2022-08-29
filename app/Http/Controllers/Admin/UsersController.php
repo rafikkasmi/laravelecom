@@ -15,6 +15,8 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //fonction treje3 page utilisateurs f admin dashboard, w fiha ga3 users
     public function index(Request $request)
     {
         //
@@ -23,17 +25,14 @@ class UsersController extends Controller
         return view('admin.users.index',['users'=>$users]);
     }
 
+    //fonction treje3 page de creation d'un user
     public function create(Request $request)
     {
         //
         return view('admin.users.add');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li t'creei le user lui meme , t'handli formulaire li f la page ta3 creation
     public function store(Request $request)
     {
         //
@@ -56,12 +55,7 @@ class UsersController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //treje3 la page de modification d'un user
     public function edit($id)
     {
         //
@@ -71,13 +65,7 @@ class UsersController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li t'handli lform ta3 modification, tjib les donnees w t'modifier la ligne f la bdd
     public function update(Request $request, $id)
     {
         //
@@ -109,6 +97,7 @@ class UsersController extends Controller
 
     }
 
+    //fonction t'supprimi un user b son id
       public function destroy($id)
     {
         //
@@ -123,12 +112,7 @@ class UsersController extends Controller
     }
   
 
-    /**
-     * block or unblock the user.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //fonction t'bloqui l'user,
     public function block($id)
     {
         //

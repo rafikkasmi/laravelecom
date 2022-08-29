@@ -14,22 +14,21 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //fonction li treje3 page categories f IT dashboard
     public function index(){
         $categories = Category::all();
         return view('it.categories.index',['categories'=>$categories]);
     }
 
+    //fonction li treje3 page de creation d'une categorie f IT dashboard
     public function create(Request $request)
     {
         //
         return view('it.categories.add');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+      //fonction li t'creei une categorie ,t'handli form ta3 page de creation d'une categorie
     public function store(Request $request)
     {
         //
@@ -46,12 +45,7 @@ class CategoriesController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li treje3 la page de modification ta3 categorie
     public function edit($id)
     {
         //
@@ -59,13 +53,7 @@ class CategoriesController extends Controller
         return view('it.categories.edit',['category'=>$category]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //fonction li t'modifier une categorie ,t'handli form ta3 page de modification d'une categorie
     public function update(Request $request, $id)
     {
         //
@@ -83,6 +71,7 @@ class CategoriesController extends Controller
         return redirect()->route('it.categories.index')->with('success', 'Category has been updated successfully!');
     }
 
+      //fonction li t'supprimi une categorie
       public function destroy($id)
     {
         //
