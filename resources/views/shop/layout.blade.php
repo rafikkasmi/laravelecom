@@ -29,6 +29,9 @@ function activeClass($current_page){
     <link rel="stylesheet" href="/css/shop/custom.css"/>
     <!-- Favicon-->
     <link rel="shortcut icon" href="/img/favicon.png">
+<meta name="theme-color" content="#6777ef"/>
+<link rel="apple-touch-icon" href="{{ asset('logo.PNG') }}">
+<link rel="manifest" href="{{ asset('/manifest.json') }}">
   </head>
   <body>
     <div class="page-holder d-flex flex-column min-vh-100">
@@ -124,5 +127,13 @@ function activeClass($current_page){
       <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     </div>
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
+</script>
   </body>
 </html>
